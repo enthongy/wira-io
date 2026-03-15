@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-03-15T02:47:50.606Z",
+  "alert_id": "ALT-54471-RES",
+  "event_type": "SELF_HEAL",
+  "original_verdict": "CRITICAL",
+  "original_risk_score": 72,
+  "human_action": "RELEASE_FUNDS",
+  "investigator": "Ahmad bin Ismail",
+  "auditor_response": "Geofencing rules relaxed for 24h. Pattern flagged for Tier-2 retraining.",
+  "learning_applied": "Down-weighted this transaction pattern for user profile.",
+  "pipeline_stage": "L3_MEMORY"
+}
