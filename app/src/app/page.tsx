@@ -163,14 +163,74 @@ export default function DashboardPage() {
     setTimeout(() => setGlobalToast(null), 3500);
   };
 
+  // ── DEMO KILL-SWITCH: Guaranteed trigger for presentation ──
+  const demoKillSwitch = useCallback(() => {
+    const accountRef = `ACC-${Math.floor(Math.random() * 9000) + 1000}`;
+    const txId = `TX-99999`;
+    const alertId = `ALT-99999`;
+    const fakeTx = {
+      transaction_id: 99999,
+      amount: 12500.00,
+      merchant_category: "Jewellery",
+      location_mismatch: true,
+      transaction_hour: 3,
+    };
+    const fakeDebate = {
+      dialogue: [
+        { agent: "SENTINEL", message: "CRITICAL: Geo-mismatch confirmed. Velocity spike: 8 transactions in 24h. 03:00 activity window — extreme anomaly." },
+        { agent: "ORACLE", message: "Behavioural deviation +340% from baseline. RM12,500 in Jewellery at 3AM — structuring pattern detected." },
+        { agent: "WIRA-LOCAL", message: "No festive calendar match. No DuitNow pattern. Foreign origin confirmed. No local context suppression applicable." },
+        { agent: "COMPLIANCE", message: "AMLATFPUAA S.14 ALERT: Jewellery category on AML watchlist. Amount exceeds BNM mandatory review threshold. Sanctions cross-check: FLAGGED." },
+        { agent: "SYSTEM", message: "OVERRIDE REQUIRED: Composite risk 99/100. All agents unanimous — CRITICAL verdict. Autonomous kill-switch engaged." },
+      ],
+      final_risk_score: 99,
+      verdict: "CRITICAL",
+    };
+    // Fire kill-switch
+    const suspendMsg = `🚨 SWARM INTERVENTION: WIRA.IO has autonomously suspended ${accountRef}. Risk score 99/100 exceeded threshold. Human review required to reactivate.`;
+    setSuspendedAccounts(prev => [...prev, accountRef]);
+    setNotifications(prev => [{ id: alertId, msg: suspendMsg, type: 'KILLSWITCH', time: new Date().toLocaleTimeString() }, ...prev].slice(0, 20));
+    setSwarmLogs(prev => [
+      { agent: 'WIRA-ORCHESTRATOR', message: `AUTONOMOUS ACTION: Account ${accountRef} suspended. Risk score 99/100 breached kill-switch threshold. No human intervention required.` },
+      ...fakeDebate.dialogue.map(d => ({ agent: d.agent, message: d.message })),
+      ...prev
+    ].slice(0, 80));
+    setGlobalToast({ msg: `🔴 Kill-Switch Activated: ${accountRef} auto-suspended. Risk 99/100.`, type: 'error' });
+    setTimeout(() => setGlobalToast(null), 6000);
+    // Add to alert inbox
+    const newAlert: Alert = { id: alertId, transaction: fakeTx, debate: fakeDebate, status: "pending" };
+    setAlerts(prev => [newAlert, ...prev].slice(0, 30));
+    setRealtimeLogs(prev => [{ id: txId, time: new Date().toLocaleTimeString(), msg: `RM 12,500.00 at Jewellery — KILL-SWITCH`, verdict: 'CRITICAL' }, ...prev].slice(0, 80));
+    setStats(prev => ({ ...prev, total: prev.total + 1, critical: prev.critical + 1 }));
+  }, []);
+
+  // Ctrl+K = instant demo kill-switch
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key === 'k') {
+        e.preventDefault();
+        demoKillSwitch();
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [demoKillSwitch]);
+
+  const demoKillSwitchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   function toggleSim() {
     if (simState === "live") {
       setSimState("off");
       if (simRef.current) clearInterval(simRef.current);
+      if (demoKillSwitchTimerRef.current) clearTimeout(demoKillSwitchTimerRef.current);
     } else {
       setSimState("live");
       fetchAlertTx(); // fetch one immediately
       simRef.current = setInterval(fetchAlertTx, 3000);
+      // Auto-fire kill-switch 60s after simulation starts (guaranteed demo moment)
+      demoKillSwitchTimerRef.current = setTimeout(() => {
+        demoKillSwitch();
+      }, 60000);
     }
   }
 
