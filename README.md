@@ -3,10 +3,30 @@
 
 > **A live, self-healing AI swarm that investigates fraud, debates findings, writes its own detection code, and files BNM-compliant reports — all without a single human touch.**
 
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-wira--io.vercel.app-brightgreen?style=for-the-badge)](https://wira-io.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-enthongy%2Fwira--io-181717?style=for-the-badge&logo=github)](https://github.com/enthongy/wira-io)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![Gemini](https://img.shields.io/badge/Gemini-1.5%20Flash-4285F4?style=for-the-badge&logo=google)](https://aistudio.google.com/)
+[![BNM](https://img.shields.io/badge/BNM-Compliant-gold?style=for-the-badge)](https://www.bnm.gov.my/)
+
 Powered by **Google Gemini 1.5 Flash · MCP · ADK · A2A Protocol · Scikit-learn**  
 BNM Compliant · AMLATFPUAA Section 14 · PCI-DSS · PDPA
 
 ---
+
+## ⚡ Quick Demo
+
+**🌐 Live:** [https://wira-io.vercel.app/](https://wira-io.vercel.app/)
+
+| Login | Role | Password | OTP |
+|---|---|---|---|
+| **Ahmad** | Investigator | any 6+ chars | any 6 digits |
+| **Siti** | Lead Auditor | any 6+ chars | any 6 digits |
+
+> Hit **"Simulate Live Feed"** after login to watch the AI swarm debate in real time.
+
+---
+
 
 ## 🖼️ Functional Diagram
 
