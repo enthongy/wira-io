@@ -26,6 +26,12 @@ BNM Compliant · AMLATFPUAA Section 14 · PCI-DSS · PDPA
 > Hit **"Simulate Live Feed"** after login to watch the AI swarm debate in real time.
 
 ---
+## 🎬 Demo Video
+
+📺 Watch the full demo:  
+https://youtu.be/j_NNLh4ABiY?si=5mIpBSmsd1iwRTx5
+
+---
 
 
 ## 🖼️ Functional Diagram
